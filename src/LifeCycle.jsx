@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import ReactDOM from 'react-dom';
 import Content from './Content';
 
 class LifeCycle extends Component {
@@ -9,9 +8,6 @@ class LifeCycle extends Component {
             data:0
         };
         this.setNewValue = this.setNewValue.bind(this);
-        setTimeout(()=>{
-          ReactDOM.unmountComponentAtNode(document.getElementById('root'))
-      }, 5000);
     }
     setNewValue(){
         this.setState({
@@ -19,12 +15,14 @@ class LifeCycle extends Component {
         });
     }
     componentWillUnmount(){
-      
+        setInterval(()=>{
+            ReactDOM.unmountComponentAtNode(document.getElementById('root'))
+        }, 5000);
     }
     render() {
         return (
             <div>
-                <button onClick={this.setNewValue}>Click</button>
+                <button onClick={this.setNewValue}></button>
                 <Content Number= {this.state.data}/>
                 
             </div>
@@ -32,6 +30,4 @@ class LifeCycle extends Component {
     }
 }
 
-ReactDOM.render(<LifeCycle/>, document.getElementById('root'));
-
-
+export default LifeCycle
